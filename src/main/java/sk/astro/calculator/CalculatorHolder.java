@@ -1,6 +1,7 @@
 package sk.astro.calculator;
 
 import sk.astro.AritmeticOperator;
+import sk.astro.Operands;
 import sk.astro.operation.*;
 
 import java.util.HashMap;
@@ -26,6 +27,11 @@ public class CalculatorHolder {
         advancedCalculatorOperationMap.put(AritmeticOperator.DIVISION, new Division());
 
         this.advancedCalculator = new AdvancedCalculator("AdvancedCalcualtor", advancedCalculatorOperationMap);
+    }
+
+    public double calculateResult(Operands operands, AritmeticOperator operator){
+        final AbstractCalculator calculator = this.getSuitableCalculator(operator);
+        return calculator.calculate(operands,operator);
     }
 
     public AbstractCalculator getSuitableCalculator(AritmeticOperator operator){
