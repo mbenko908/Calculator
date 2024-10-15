@@ -15,21 +15,22 @@ public class Main {
             System.out.println("Write number, then type of operation (+, -, *, /) and then write number again");
             System.out.println("Example 1 + 5");
             double left, right;
-            char operator;
+            //char operator;
+            final AritmeticOperator operator;
 
             try {
                 left = scanner.nextDouble();
-                operator = scanner.next().charAt(0);
+                final String line = scanner.next();
+                operator = AritmeticOperator.getFromSymbol(line);
                 right = scanner.nextDouble();
-            } catch (InputMismatchException e) {
+            } catch (InputMismatchException | IllegalArgumentException e) {
                 System.out.println("Invalid input");
+                scanner.nextLine();
                 continue;
             }
 
-
             final Operands operands = new Operands(left, right);
-            final AbstractCalculator calculator = calculatorHolder.getSuitableCalculator(operator);
-            calculator.calculate(operands, operator);
+            calculatorHolder.getSuitableCalculator(operator).calculate(operands,operator);
 
         } while (true);
     }

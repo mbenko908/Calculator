@@ -1,5 +1,6 @@
 package sk.astro.calculator;
 
+import sk.astro.AritmeticOperator;
 import sk.astro.operation.Operation;
 import sk.astro.Operands;
 
@@ -7,14 +8,14 @@ import java.util.Map;
 
 public abstract class AbstractCalculator {
     private final String name;
-    private final Map<Character, Operation> operationMap;
+    private final Map<AritmeticOperator, Operation> operationMap;
 
-    public AbstractCalculator(String name, Map<Character, Operation> operationMap){
+    public AbstractCalculator(String name, Map<AritmeticOperator, Operation> operationMap){
         this.name = name;
         this.operationMap = operationMap;
     }
 
-    public double calculate(Operands operands, Character operator){
+    public double calculate(Operands operands, AritmeticOperator operator){
         if (this.operationMap.containsKey(operator)){
             final Operation operation = this.operationMap.get(operator);
             final double result = this.calculateResult(operands, operation);
